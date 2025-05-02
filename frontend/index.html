@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rescape MUD</title>
+    <title>Rescape MUD v0.9</title>
     <style>
         body { font-family: monospace; background: black; color: white; padding: 20px; }
         #log { height: 300px; overflow-y: auto; border: 1px solid white; padding: 10px; }
@@ -21,7 +21,7 @@
     <script>
         let log = document.getElementById("log");
         let input = document.getElementById("command");
-        let ws = new WebSocket("ws://localhost:8080");
+        let ws = new WebSocket("ws://localhost:4000/ws");
 
         ws.onopen = () => logMessage("Connected to Rescape MUD.\nEnter your name:");
 
