@@ -1,0 +1,38 @@
+{
+    "name": "Aethar the Thief",
+    "symbol": "REESCAPE",
+    "description": "A nimble shadow with a wicked grin.",
+    "image": "https://reescape.xyz/images/thief1.png",
+    "collection": {
+      "name": "Reescape Characters",
+      "family": "Reescape"
+    },
+    "attributes": [
+      { "trait_type": "Class", "value": "Thief" },
+      { "trait_type": "Level", "value": 1 },
+      { "trait_type": "QuestsCompleted", "value": 0 },
+      { "trait_type": "HP", "value": 14 },
+      { "trait_type": "STR", "value": 8 },
+      { "trait_type": "DEX", "value": 14 },
+      { "trait_type": "INT", "value": 10 },
+      { "trait_type": "WIS", "value": 11 },
+      { "trait_type": "CON", "value": 9 },
+      { "trait_type": "CHA", "value": 13 }
+    ],
+    "properties": {
+      "files": [
+        {
+          "uri": "https://reescape.xyz/images/thief1.png",
+          "type": "image/png"
+        }
+      ],
+      "category": "image",
+      "creators": [
+        {
+          "address": "YourCreatorWalletHere",
+          "share": 100
+        }
+      ]
+    }
+  }
+  
