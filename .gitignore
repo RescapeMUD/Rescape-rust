@@ -1,3 +1,7 @@
+#Ignore environmental variables
+/frontend/.env
+.env
+
 # Ignore the target directory (cargo build output)
 target/
 
@@ -12,7 +16,12 @@ target/
 *.tmp
 
 # Ignore node_modules if you use a frontend (e.g., with yew, leptos, etc.)
-node_modules/
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.vite/
+/node_modules/
+/package-lock.json
+/.vite
 
 # Ignore IDE specific files
 .idea/
@@ -22,7 +31,9 @@ node_modules/
 /coverage/
 
 # Ignore Cargo.lock if it's a library, otherwise keep it for binaries
-# (for binaries like a game server, keep Cargo.lock committed!)
+/target
+**/*.rs.bk
+Cargo.lock
 
 # Ignore by default generated artifacts
 *.rlib
@@ -30,7 +41,10 @@ node_modules/
 *.pdb
 *.obj
 
-# MacOS specific files
-.DS_Store
+# Ignore MacOS specific files
 .AppleDouble
 .LSOverride
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

@@ -37,8 +37,8 @@ fn autocomplete_class(input: &str) -> Option<String> {
 async fn main() {
     println!("🚀 Starting Rescape MUD on http://localhost:4000");
 
-    // Serve static files (e.g., index.html)
-    let files = warp::fs::dir("./frontend");
+    // Serve static files
+    let files = warp::fs::dir("./frontend/build");
 
     // WebSocket route
     let ws_route = warp::path("ws")
