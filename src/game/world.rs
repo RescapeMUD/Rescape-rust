@@ -1,11 +1,7 @@
 use std::collections::HashMap;
 use crate::game::player::Player;
-
-pub struct Room {
-    pub description: String,
-    pub exits: HashMap<String, String>, // e.g., "north" -> "forest"
-    pub items: Vec<String>,
-}
+use crate::game::room::Room;
+use crate::game::flags::RoomFlag;
 
 pub struct World {
     pub rooms: HashMap<String, Room>,
@@ -16,16 +12,20 @@ impl World {
         let mut rooms = HashMap::new();
 
         rooms.insert("village".to_string(), Room {
+            id: "village".to_string(),
             description: "You are in a peaceful village. Paths lead north to a forest.".to_string(),
             exits: HashMap::from([("north".to_string(), "forest".to_string())]),
             items: vec!["sword".to_string()],
-        });
+            flags: vec![RoomFlag::Safe], 
+        });        
 
         rooms.insert("forest".to_string(), Room {
+            id: "forest".to_string(),
             description: "You are in a dense forest. The village is to the south.".to_string(),
             exits: HashMap::from([("south".to_string(), "village".to_string())]),
             items: vec![],
-        });
+            flags: vec![],
+        });        
 
         Self { rooms }
     }

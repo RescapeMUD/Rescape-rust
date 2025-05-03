@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rescape MUD v0.9</title>
+    <link rel="icon" href="data:,">
     <style>
         body { font-family: monospace; background: black; color: white; padding: 20px; }
         #log { height: 300px; overflow-y: auto; border: 1px solid white; padding: 10px; }
@@ -14,43 +15,64 @@
 <body>
 
     <h1>Rescape MUD</h1>
+    <button id="connect">Connect</button>
     <div id="log"></div>
-    <input type="text" id="command" placeholder="Type a command...">
+    <input type="text" id="command" placeholder="Type a command..." disabled>
     <button onclick="sendCommand()">Send</button>
 
     <script>
-        let log = document.getElementById("log");
-        let input = document.getElementById("command");
-        let ws = new WebSocket("ws://localhost:4000/ws");
+        window.onload = function () {
+            let log = document.getElementById("log");
+            let input = document.getElementById("command");
+            let connectButton = document.getElementById("connect");
+            let ws;
 
-        ws.onopen = () => logMessage("Connected to Rescape MUD.\nEnter your name:");
+            function connectToGame() {
+                ws = new WebSocket("ws://localhost:4000/ws");
 
-        ws.onmessage = (event) => {
-            logMessage(event.data);
-            if (event.data.includes("Choose a class")) {
-                logMessage("Mage, Warrior, Thief, Necromancer");
+                ws.onopen = () => {
+                    log.innerHTML = "";
+                    logMessage("Connected to Rescape MUD.\nEnter your name:");
+                    input.disabled = false;
+                    input.focus();
+                };
+
+                ws.onmessage = (event) => {
+                    logMessage(event.data);
+                };
+
+                ws.onclose = () => {
+                    logMessage("Connection closed.");
+                    input.disabled = true;
+                };
             }
+
+            function sendCommand() {
+                let command = input.value;
+                if (command.trim() !== "") {
+                    ws.send(command);
+                    logMessage("> " + command);
+                    input.value = "";
+
+                    if (command.trim().toLowerCase() === "exit") {
+                        ws.close();
+                    }
+                }
+            }
+
+            function logMessage(message) {
+                log.innerHTML += "<p>" + message.replace(/\n/g, "<br>") + "</p>";
+                log.scrollTop = log.scrollHeight;
+            }
+
+            input.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    sendCommand();
+                }
+            });
+
+            connectButton.addEventListener("click", connectToGame);
         };
-
-        function sendCommand() {
-            let command = input.value;
-            if (command.trim() !== "") {
-                ws.send(command);
-                logMessage("> " + command);
-                input.value = "";
-            }
-        }
-
-        function logMessage(message) {
-            log.innerHTML += "<p>" + message.replace(/\n/g, "<br>") + "</p>";
-            log.scrollTop = log.scrollHeight;
-        }
-
-        input.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                sendCommand();
-            }
-        });
     </script>
 
 </body>

@@ -69,6 +69,11 @@ pub async fn handle_websocket(ws: WebSocket) {
         if let Ok(received) = msg.to_str() {
             let received = received.trim().to_string();
 
+            if received.eq_ignore_ascii_case("exit") {
+                let _ = tx.send(Message::text("Goodbye! Disconnecting...")).await;
+                break;
+            }
+
             if player.is_none() {
                 // Step 1: Get name
                 if player_name.is_empty() {
