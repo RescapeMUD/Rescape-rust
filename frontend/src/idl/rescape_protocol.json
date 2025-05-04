@@ -1,0 +1,119 @@
+{
+  "address": "ExXC4aBe6MtJ9LdMP8wB9536KPkGCd2bdp1og4BzTYWz",
+  "metadata": {
+    "name": "rescape_protocol",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "initialize_character",
+      "discriminator": [
+        82,
+        30,
+        2,
+        32,
+        52,
+        45,
+        168,
+        230
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "character",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  114,
+                  97,
+                  99,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "class",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Character",
+      "discriminator": [
+        140,
+        115,
+        165,
+        36,
+        241,
+        153,
+        102,
+        84
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Character",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "class",
+            "type": "string"
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "quest_flags",
+            "type": "bytes"
+          }
+        ]
+      }
+    }
+  ]
+}

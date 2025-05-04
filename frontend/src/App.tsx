@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import { WalletMultiButton, WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
+import { useAnchorProgram } from './utils/anchorClient';
 
 function App() {
     const [log, setLog] = useState<string[]>([]);
     const [input, setInput] = useState('');
     const [ws, setWs] = useState<WebSocket | null>(null);
     const logRef = useRef<HTMLDivElement>(null);
+    const program = useAnchorProgram();
 
     useEffect(() => {
         if (logRef.current) {
@@ -62,6 +65,12 @@ function App() {
     return (
         <div>
             <h1>Rescape MUD</h1>
+            {program == null ?
+                <p>Connect your wallet to begin.</p>
+                :
+            null}
+            <WalletMultiButton />
+            <WalletDisconnectButton />
             <button onClick={connectToGame}>Connect</button>
             <div id="log" ref={logRef}>
                 {log.map((line, index) => (

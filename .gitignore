@@ -56,3 +56,10 @@ Cargo.lock
 Thumbs.db
 *.log
 npm-debug.log*
+
+# General paranoia
+*.json
+!frontend/src/idl/rescape_protocol.json
+!frontend/src/types/rescape_protocol.ts
+*.key
+*.pem
