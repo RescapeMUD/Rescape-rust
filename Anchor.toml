@@ -1,0 +1,9 @@
+[workspace]
+members = ["programs/rescape_protocol"]
+
+[programs.devnet]
+rescape_protocol = "ExXC4aBe6MtJ9LdMP8wB9536KPkGCd2bdp1og4BzTYWz"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
